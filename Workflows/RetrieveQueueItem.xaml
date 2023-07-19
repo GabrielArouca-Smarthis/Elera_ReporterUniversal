@@ -15,11 +15,6 @@
         <RequiredArgumentAttribute />
       </x:Property.Attributes>
     </x:Property>
-    <x:Property Name="in_endPointJobsOnPrem" Type="InArgument(x:String)">
-      <x:Property.Attributes>
-        <RequiredArgumentAttribute />
-      </x:Property.Attributes>
-    </x:Property>
     <x:Property Name="in_uipathOrganizationUnitId" Type="InArgument(x:String)">
       <x:Property.Attributes>
         <RequiredArgumentAttribute />
@@ -28,11 +23,21 @@
     <x:Property Name="in_definitionId" Type="InArgument(x:String)" />
     <x:Property Name="in_blockQuantity" Type="InArgument(x:Int32)" />
     <x:Property Name="in_limitQueueNumber" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_endPoint" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property Name="in_orchestratorFolderPath" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>962,2073</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>886.4,2180</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>RetrieveQueueItem_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="35">
@@ -74,7 +79,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="64">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -107,9 +112,11 @@
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
       <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="RetrieveQueueItem" sap:VirtualizedContainerService.HintSize="838,2008" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="RetrieveQueueItem" sap:VirtualizedContainerService.HintSize="896.8,2115.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Default="1" Name="multiplierSkip" />
       <Variable x:TypeArguments="x:String" Name="response" />
@@ -124,14 +131,14 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="796,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[String.Format(&quot;Iniciando coleta de itens na fila {0} pela query {1}&quot;,in_queueName,in_endPointJobsOnPrem)]">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="834.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[String.Format(&quot;Iniciando coleta de itens na fila {0} pela query {1}&quot;,in_queueName,in_endPoint)]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:MultipleAssign DisplayName="Init RetrieveQueueItem vars" sap:VirtualizedContainerService.HintSize="796,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Init RetrieveQueueItem vars" sap:VirtualizedContainerService.HintSize="834.4,164" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
@@ -150,18 +157,26 @@
               <InArgument x:TypeArguments="njl:JArray">[New JArray()]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[in_blockQuantity]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">[if(in_blockQuantity &gt; 0, in_blockQuantity, 1000)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:InterruptibleDoWhile Condition="[listQueueItem.Count &lt; listQueueItemLength AndAlso listQueueItem.Count &lt;= in_limitQueueNumber]" DisplayName="Request por bloco de itens" sap:VirtualizedContainerService.HintSize="796,1096" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+    <ui:InterruptibleDoWhile Condition="[listQueueItem.Count &lt; listQueueItemLength AndAlso listQueueItem.Count &lt;= in_limitQueueNumber]" DisplayName="Request por bloco de itens" sap:VirtualizedContainerService.HintSize="834.4,1148" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
       <ui:InterruptibleDoWhile.Body>
-        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="760,931" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="799.2,980.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" EnableSSLVerification="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" DisplayName="Private: HTTP request queue item" EndPoint="[String.Format(in_endPointJobsOnPrem,in_blockQuantity.ToString,in_definitionId,(quantityRequest*in_blockQuantity).ToString)]" sap:VirtualizedContainerService.HintSize="718,22" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="GET" Result="[response]" StatusCode="[statusCode]" TimeoutMS="60000">
+          <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" EnableSSLVerification="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" DisplayName="Private: HTTP request queue item" EndPoint="[String.Format(in_endPoint,in_blockQuantity.ToString,in_definitionId,(quantityRequest*in_blockQuantity).ToString)]" sap:VirtualizedContainerService.HintSize="736.8,24.8" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="GET" Result="[response]" StatusCode="[statusCode]" TimeoutMS="60000">
             <ui:HttpClient.Attachments>
               <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
             </ui:HttpClient.Attachments>
@@ -169,8 +184,12 @@
               <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
             </ui:HttpClient.Cookies>
             <ui:HttpClient.Headers>
-              <InArgument x:TypeArguments="x:String" x:Key="Authorization">[New System.Net.NetworkCredential(String.Empty,in_token).Password]</InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-OrganizationUnitId">[in_uipathOrganizationUnitId]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="Authorization">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="New System.Net.NetworkCredential(String.Empty,in_token).Password" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-FolderPath">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_orchestratorFolderPath" />
+              </InArgument>
             </ui:HttpClient.Headers>
             <ui:HttpClient.Parameters>
               <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
@@ -179,8 +198,8 @@
               <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
             </ui:HttpClient.UrlSegments>
           </ui:HttpClient>
-          <ui:LogMessage DisplayName="Http request log" sap:VirtualizedContainerService.HintSize="718,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Request por bloco atual: &quot; + String.Format(in_endPointJobsOnPrem,in_blockQuantity.ToString,in_definitionId,(quantityRequest*in_blockQuantity).ToString)]" />
-          <If Condition="[statusCode = 200]" DisplayName="If request was success" sap:VirtualizedContainerService.HintSize="718,646" sap2010:WorkflowViewState.IdRef="If_3">
+          <ui:LogMessage DisplayName="Http request log" sap:VirtualizedContainerService.HintSize="736.8,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Request por bloco atual: &quot; + String.Format(in_endPoint,in_blockQuantity.ToString,in_definitionId,(quantityRequest*in_blockQuantity).ToString)]" />
+          <If Condition="[statusCode = 200]" DisplayName="If request was success" sap:VirtualizedContainerService.HintSize="736.8,671.2" sap2010:WorkflowViewState.IdRef="If_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -188,13 +207,13 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence DisplayName="Sequence deserialize json response" sap:VirtualizedContainerService.HintSize="473,489" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <Sequence DisplayName="Sequence deserialize json response" sap:VirtualizedContainerService.HintSize="492.8,512" sap2010:WorkflowViewState.IdRef="Sequence_5">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MultipleAssign sap2010:Annotation.AnnotationText="Catch items with status successfull, new failed." DisplayName="Assign parseListQueueItem" sap:VirtualizedContainerService.HintSize="431,193" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+                <ui:MultipleAssign sap2010:Annotation.AnnotationText="Catch items with status successfull, new failed." DisplayName="Assign parseListQueueItem" sap:VirtualizedContainerService.HintSize="430.4,195.2" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
                   <ui:MultipleAssign.AssignOperations>
                     <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
@@ -229,20 +248,16 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <ui:InvokeCode ContinueOnError="{x:Null}" Code="For Each item As JArray In in_parseListQueueItem&#xD;&#xA;&#x9;io_listQueueItem.Merge(item.Value(Of JToken))&#xD;&#xA;Next" DisplayName="Merge listQueueItem with parseListQueueItem.value(JToken)" sap:VirtualizedContainerService.HintSize="431,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+                <ui:InvokeCode ContinueOnError="{x:Null}" Code="For Each item As JArray In in_parseListQueueItem&#xA;&#x9;io_listQueueItem.Merge(item.Value(Of JToken))&#xA;Next" DisplayName="Merge listQueueItem with parseListQueueItem.value(JToken)" sap:VirtualizedContainerService.HintSize="430.4,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
                   <ui:InvokeCode.Arguments>
-                    <InOutArgument x:TypeArguments="njl:JArray" x:Key="io_listQueueItem">
-                      <mva:VisualBasicReference x:TypeArguments="njl:JArray" ExpressionText="listQueueItem" />
-                    </InOutArgument>
-                    <InArgument x:TypeArguments="njl:JArray" x:Key="in_parseListQueueItem">
-                      <mva:VisualBasicValue x:TypeArguments="njl:JArray" ExpressionText="parseListQueueItem" />
-                    </InArgument>
+                    <InOutArgument x:TypeArguments="njl:JArray" x:Key="io_listQueueItem">[listQueueItem]</InOutArgument>
+                    <InArgument x:TypeArguments="njl:JArray" x:Key="in_parseListQueueItem">[parseListQueueItem]</InArgument>
                   </ui:InvokeCode.Arguments>
                 </ui:InvokeCode>
               </Sequence>
             </If.Then>
             <If.Else>
-              <Throw DisplayName="Throw - BRE" Exception="[New BusinessRuleException(String.Format(&quot;Falha ao tentar recuperar os itens de fila do orquestrador {0}. Response {1}, StatusCode {2}&quot;,in_endPointJobsOnPrem,response,statusCode.ToString))]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_5" />
+              <Throw DisplayName="Throw - BRE" Exception="[New BusinessRuleException(String.Format(&quot;Falha ao tentar recuperar os itens de fila do orquestrador {0}. Response {1}, StatusCode {2}&quot;,in_endPoint,response,statusCode.ToString))]" sap:VirtualizedContainerService.HintSize="200,24.8" sap2010:WorkflowViewState.IdRef="Throw_5" />
             </If.Else>
           </If>
         </Sequence>

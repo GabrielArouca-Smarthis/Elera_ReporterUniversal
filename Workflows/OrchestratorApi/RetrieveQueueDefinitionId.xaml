@@ -15,24 +15,24 @@
         <RequiredArgumentAttribute />
       </x:Property.Attributes>
     </x:Property>
-    <x:Property Name="in_endPointQueueDefinitionIdOnPrem" Type="InArgument(x:String)">
-      <x:Property.Attributes>
-        <RequiredArgumentAttribute />
-      </x:Property.Attributes>
-    </x:Property>
     <x:Property Name="in_orchestratorFolderPath" Type="InArgument(x:String)">
       <x:Property.Attributes>
         <RequiredArgumentAttribute />
       </x:Property.Attributes>
     </x:Property>
+    <x:Property Name="in_endPointQueueDefinitionId" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
   </x:Members>
-  <this:RetrieveQueueDefinitionId.in_endPointQueueDefinitionIdOnPrem>
+  <this:RetrieveQueueDefinitionId.in_endPointQueueDefinitionId>
     <InArgument x:TypeArguments="x:String" />
-  </this:RetrieveQueueDefinitionId.in_endPointQueueDefinitionIdOnPrem>
+  </this:RetrieveQueueDefinitionId.in_endPointQueueDefinitionId>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>729.6,616</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>792,860</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>RetrieveQueueDefinitionId_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="58">
@@ -100,9 +100,11 @@
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="RetrieveQueueDefinitionId" sap:VirtualizedContainerService.HintSize="740,551.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="RetrieveQueueDefinitionId" sap:VirtualizedContainerService.HintSize="802.4,795.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="response" />
       <Variable x:TypeArguments="x:Int32" Name="statusCode" />
@@ -112,14 +114,14 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="677.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[String.Format(&quot;Recuperando o definition id da fila {0} pela query {1}&quot;,in_queueName,in_endPointQueueDefinitionIdOnPrem)]">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="740,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[String.Format(&quot;Recuperando o definition id da fila {0} pela query {1}&quot;,in_queueName,in_endPointQueueDefinitionId)]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" EnableSSLVerification="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" DisplayName="Private: HTTP request queue definition id" EndPoint="[in_endPointQueueDefinitionIdOnPrem]" sap:VirtualizedContainerService.HintSize="677.6,24.8" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="GET" Result="[response]" StatusCode="[statusCode]" TimeoutMS="60000">
+    <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" EnableSSLVerification="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" DisplayName="Private: HTTP request queue definition id" EndPoint="[in_endPointQueueDefinitionId]" sap:VirtualizedContainerService.HintSize="740,24.8" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="GET" Result="[response]" StatusCode="[statusCode]" TimeoutMS="60000">
       <ui:HttpClient.Attachments>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Attachments>
@@ -127,12 +129,8 @@
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Cookies>
       <ui:HttpClient.Headers>
-        <InArgument x:TypeArguments="x:String" x:Key="Authorization">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="New System.Net.NetworkCredential(String.Empty,in_token).Password" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-FolderPath">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_orchestratorFolderPath" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Authorization">[New System.Net.NetworkCredential(String.Empty,in_token).Password]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-FolderPath">[in_orchestratorFolderPath]</InArgument>
       </ui:HttpClient.Headers>
       <ui:HttpClient.Parameters>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
@@ -141,7 +139,7 @@
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.UrlSegments>
     </ui:HttpClient>
-    <If Condition="[statusCode = 200]" DisplayName="If request was success" sap:VirtualizedContainerService.HintSize="677.6,241.6" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[statusCode = 200]" DisplayName="If request was success" sap:VirtualizedContainerService.HintSize="740,485.6" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -149,14 +147,22 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Assign DisplayName="Assign out_listQueueItem" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:String">[out_definitionId]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.Linq.JToken.Parse(response)("value").Where(Function(x) x("Name").Value(Of String).Equals(in_queueName))(0)("Id").ToString]</InArgument>
-          </Assign.Value>
-        </Assign>
+        <Sequence sap:VirtualizedContainerService.HintSize="496,326.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign out_listQueueItem" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[out_definitionId]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.Linq.JToken.Parse(response)("value").Where(Function(x) x("Name").Value(Of String).Equals(in_queueName))(0)("Id").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[String.Format(&quot;Queue Definition ID: {0}&quot;, out_definitionId)]" />
+        </Sequence>
       </If.Then>
       <If.Else>
         <Throw DisplayName="Throw - BRE" Exception="[New BusinessRuleException(String.Format(&quot;Falha ao tentar recuperar o id da fila {0}. Response {1}, StatusCode {2}&quot;,in_queueName,response,statusCode.ToString))]" sap:VirtualizedContainerService.HintSize="200,24.8" sap2010:WorkflowViewState.IdRef="Throw_1" />
