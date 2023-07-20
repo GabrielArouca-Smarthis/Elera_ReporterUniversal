@@ -36,14 +36,15 @@
         <RequiredArgumentAttribute />
       </x:Property.Attributes>
     </x:Property>
+    <x:Property Name="in_columnsToKeep" Type="InArgument(s:String[])" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>899,2683</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1229,2677</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SendMailReport_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="64">
+    <scg:List x:TypeArguments="x:String" Capacity="44">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -91,7 +92,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="58">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -134,7 +135,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SendMailReport" sap:VirtualizedContainerService.HintSize="597,2578" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SendMailReport" sap:VirtualizedContainerService.HintSize="1037,2492" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="bodyHtml" />
       <Variable x:TypeArguments="x:String" Name="successItems" />
@@ -145,36 +146,52 @@
       <Variable x:TypeArguments="x:String" Name="in_lasDayPercentage" />
       <Variable x:TypeArguments="x:String" Name="in_lastDayExecutionDate" />
       <Variable x:TypeArguments="sd:DataTable" Name="queueFiltered" />
-      <Variable x:TypeArguments="x:String" Name="test" />
+      <Variable x:TypeArguments="x:String" Name="queueFilteredText" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="535,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[if(in_sendMailToBusinessArea AndAlso Not String.IsNullOrEmpty(in_mailReceiver),String.format(&quot;Enviando email de relatório da fila {0} para {1};{2}&quot;,in_queueName,in_mailReceiver,in_mailReceiverCc),String.format(&quot;Enviando email de relatório da fila {0} para {1}&quot;,in_queueName,in_mailReceiverCc))]" />
-    <Assign DisplayName="Assign - Create queueFiltered DT" sap:VirtualizedContainerService.HintSize="535,82" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="975,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[if(in_sendMailToBusinessArea AndAlso Not String.IsNullOrEmpty(in_mailReceiver),String.format(&quot;Enviando email de relatório da fila {0} para {1};{2}&quot;,in_queueName,in_mailReceiver,in_mailReceiverCc),String.format(&quot;Enviando email de relatório da fila {0} para {1}&quot;,in_queueName,in_mailReceiverCc))]" />
+    <Assign sap:VirtualizedContainerService.HintSize="975,61" sap2010:WorkflowViewState.IdRef="Assign_16">
       <Assign.To>
-        <OutArgument x:TypeArguments="sd:DataTable">[queueFiltered]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable">[in_queueHistoric]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="sd:DataTable">[in_queueHistoric.Clone]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable">[new DataTable()]</InArgument>
       </Assign.Value>
     </Assign>
-    <TryCatch DisplayName="Try Catch - Filter queueHistoric" sap:VirtualizedContainerService.HintSize="535,311" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+    <TryCatch DisplayName="Try Catch - Filter queueHistoric" sap:VirtualizedContainerService.HintSize="975,393" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Assign DisplayName="Assign - Filter queueHistoric" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_3">
-          <Assign.To>
-            <OutArgument x:TypeArguments="sd:DataTable">[queueFiltered]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[in_queueHistoric.AsEnumerable.
-Where(Function(x) DateTime.ParseExact(x.Item("Início").ToString,"yyyy-MM-dd HH:mm:ss",System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR")) &gt; Now.AddDays(- 1)).CopyToDataTable]</InArgument>
-          </Assign.Value>
-        </Assign>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="queueFiltered = New DataTable()&#xD;&#xA;&#xD;&#xA;If columnsToKeep.Length = 0 Then&#xD;&#xA;    queueFiltered = queueHistoric.Copy()&#xD;&#xA;Else&#xD;&#xA;&#x9;For Each col As DataColumn In queueHistoric.Columns&#xD;&#xA;&#x9;    If columnsToKeep.Contains(col.ColumnName) Then&#xD;&#xA;&#x9;        queueFiltered.Columns.Add(New DataColumn(col.ColumnName, col.DataType))&#xD;&#xA;&#x9;    End If&#xD;&#xA;&#x9;Next&#xD;&#xA;&#xD;&#xA;&#x9;For Each row As DataRow In queueHistoric.Rows&#xD;&#xA;&#x9;&#x9;Dim newRow As DataRow = queueFiltered.NewRow()&#xD;&#xA;&#x9;&#x9;For Each col As DataColumn In queueFiltered.Columns&#xD;&#xA;&#x9;&#x9;    newRow(col.ColumnName) = row(col.ColumnName)&#xD;&#xA;&#x9;&#x9;Next&#xD;&#xA;&#x9;&#x9;queueFiltered.Rows.Add(newRow)&#xD;&#xA;&#x9;Next&#xD;&#xA;End If&#xD;&#xA;Dim filteredRows As IEnumerable(Of DataRow) = queueFiltered.AsEnumerable().Where(Function(x) DateTime.ParseExact(x.Item(&quot;Início&quot;).ToString, &quot;yyyy-MM-dd HH:mm:ss&quot;, System.Globalization.CultureInfo.CreateSpecificCulture(&quot;pt-BR&quot;)) &gt; Now.AddDays(-1))&#xD;&#xA;queueFiltered = filteredRows.CopyToDataTable()" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="334,165" sap2010:WorkflowViewState.IdRef="InvokeCode_4">
+          <ui:InvokeCode.Arguments>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="queueHistoric">
+              <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_queueHistoric" />
+            </InArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="queueFiltered">
+              <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="queueFiltered" />
+            </OutArgument>
+            <InArgument x:TypeArguments="s:String[]" x:Key="columnsToKeep">
+              <mva:VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="in_columnsToKeep" />
+            </InArgument>
+          </ui:InvokeCode.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeCode>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="438,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -185,148 +202,203 @@ Where(Function(x) DateTime.ParseExact(x.Item("Início").ToString,"yyyy-MM-dd HH:
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Throw DisplayName="Throw - No Items" Exception="[new BusinessRuleException(&quot;Não existem itens processados nas últimas 24 horas&quot;)]" sap:VirtualizedContainerService.HintSize="200,25" sap2010:WorkflowViewState.IdRef="Throw_1" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Não existem itens processados nas últimas 24 horas&quot;]" />
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <TryCatch DisplayName="Try Catch - Get Sucess Items" sap:VirtualizedContainerService.HintSize="535,314" sap2010:WorkflowViewState.IdRef="TryCatch_6">
-      <TryCatch.Try>
-        <Assign DisplayName="Assign - Get Sucess Items" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_4">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:String">[successItems]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:String" xml:space="preserve">[queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Negócio")).
+    <If Condition="[queueFiltered IsNot Nothing]" sap:VirtualizedContainerService.HintSize="975,1264" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="496,1105" sap2010:WorkflowViewState.IdRef="Sequence_20">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch DisplayName="Try Catch - Get Sucess Items" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="TryCatch_9">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <Assign DisplayName="Assign - Get Sucess Items" sap:VirtualizedContainerService.HintSize="262,65" sap2010:WorkflowViewState.IdRef="Assign_10">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[successItems]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String" xml:space="preserve">[queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Sucesso")).
 CopyToDataTable.RowCount.ToString]</InArgument>
-          </Assign.Value>
-        </Assign>
-      </TryCatch.Try>
-      <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="440,151" sap2010:WorkflowViewState.IdRef="Catch`1_4">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ActivityAction x:TypeArguments="s:Exception">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-            </ActivityAction.Argument>
-            <Assign DisplayName="Assign - Set 0 sucess Items" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_7">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[successItems]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">0</InArgument>
-              </Assign.Value>
-            </Assign>
-          </ActivityAction>
-        </Catch>
-      </TryCatch.Catches>
-    </TryCatch>
-    <TryCatch DisplayName="Try Catch - Get Application Exception Items" sap:VirtualizedContainerService.HintSize="535,314" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+                </Assign.Value>
+              </Assign>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_7">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Assign DisplayName="Assign - Set 0 sucess Items" sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="Assign_11">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[successItems]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">0</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <TryCatch DisplayName="Try Catch - Get Application Exception Items" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="TryCatch_10">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <Assign DisplayName="Assign - Get Application Exception Items" sap:VirtualizedContainerService.HintSize="262,65" sap2010:WorkflowViewState.IdRef="Assign_12">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[applicationItems]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String" xml:space="preserve">[queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Aplicação")).
+CopyToDataTable.RowCount.ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_8">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Assign DisplayName="Assign - Set 0 Application Exception Items" sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="Assign_13">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[applicationItems]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">0</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <TryCatch DisplayName="Try Catch - Get BusinessException Items" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="TryCatch_11">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <Assign DisplayName="Assign - Get Buisiness Exception Items" sap:VirtualizedContainerService.HintSize="262,65" sap2010:WorkflowViewState.IdRef="Assign_14">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[businessItems]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String" xml:space="preserve">[queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Negócio")).
+CopyToDataTable.RowCount.ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_9">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Assign DisplayName="Assign - Set 0 Business Exception Items" sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="Assign_15">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[businessItems]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">0</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="If queueFiltered.Columns.Contains(&quot;Início&quot;) AndAlso queueFiltered.Columns(&quot;Início&quot;).DataType Is GetType(String) AndAlso&#xD;&#xA;   queueFiltered.Columns.Contains(&quot;Data de Validade&quot;) AndAlso queueFiltered.Columns(&quot;Data de Validade&quot;).DataType Is GetType(String) Then&#xD;&#xA;&#xD;&#xA;    For Each row As DataRow In queueFiltered.Rows&#xD;&#xA;        Dim inicio As DateTime&#xD;&#xA;        Dim dataValidade As DateTime&#xD;&#xA;&#xD;&#xA;        If DateTime.TryParseExact(row(&quot;Início&quot;).ToString(), &quot;yyyy-MM-dd HH:mm:ss&quot;, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, inicio) Then&#xD;&#xA;            row(&quot;Início&quot;) = inicio.ToString(&quot;dd/MM/yyyy&quot;)&#xD;&#xA;        End If&#xD;&#xA;&#xD;&#xA;        If DateTime.TryParseExact(row(&quot;Data de Validade&quot;).ToString(), &quot;MM/dd/yyyy HH:mm:ss&quot;, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, dataValidade) Then&#xD;&#xA;            row(&quot;Data de Validade&quot;) = dataValidade.ToString(&quot;dd/MM/yyyy&quot;)&#xD;&#xA;        End If&#xD;&#xA;    Next&#xD;&#xA;End If&#xD;&#xA;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="434,165" sap2010:WorkflowViewState.IdRef="InvokeCode_5">
+            <ui:InvokeCode.Arguments>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="queueFiltered">
+                <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="queueFiltered" />
+              </InOutArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+          <ui:OutputDataTable DataTable="[queueFiltered]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="434,80" sap2010:WorkflowViewState.IdRef="OutputDataTable_2" Text="[queueFilteredText]" />
+          <ui:GenerateDataTable ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" CSVParsing="True" ColumnSeparators="," DataTable="[queueFiltered]" DisplayName="Generate Data Table" sap:VirtualizedContainerService.HintSize="434,201" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[queueFilteredText]" />
+          <umab:CreateHtmlContent DisplayName="Create HTML Content - with table" sap:VirtualizedContainerService.HintSize="434,152" HtmlContent="[bodyHtml]" sap2010:WorkflowViewState.IdRef="CreateHtmlContent_6">
+            <umab:CreateHtmlContent.HtmlContentArg>
+              <umabh:HtmlContentArgument FilePath=".data/HtmlContent0.html">
+                <umabh:HtmlContentArgument.RuntimeImages>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                </umabh:HtmlContentArgument.RuntimeImages>
+                <umabh:HtmlContentArgument.ValueMappings>
+                  <scg:List x:TypeArguments="umabh:HtmlValueMappingBase" Capacity="8">
+                    <umabh:HtmlTextValueMapping Name="sucess" Value="[successItems]" />
+                    <umabh:HtmlTableValueMapping Name="Table" Value="[queueFiltered]" />
+                    <umabh:HtmlTextValueMapping Name="application" Value="[applicationItems]" />
+                    <umabh:HtmlTextValueMapping Name="business" Value="[businessItems]" />
+                    <umabh:HtmlTextValueMapping Name="teamName" Value="[&quot;Elera&quot;]" />
+                  </scg:List>
+                </umabh:HtmlContentArgument.ValueMappings>
+              </umabh:HtmlContentArgument>
+            </umab:CreateHtmlContent.HtmlContentArg>
+          </umab:CreateHtmlContent>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <umab:CreateHtmlContent DisplayName="Create HTML Content - without table" sap:VirtualizedContainerService.HintSize="434,152" HtmlContent="[bodyHtml]" sap2010:WorkflowViewState.IdRef="CreateHtmlContent_7">
+          <umab:CreateHtmlContent.HtmlContentArg>
+            <umabh:HtmlContentArgument FilePath=".data/HtmlContent1.html">
+              <umabh:HtmlContentArgument.RuntimeImages>
+                <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+              </umabh:HtmlContentArgument.RuntimeImages>
+              <umabh:HtmlContentArgument.ValueMappings>
+                <scg:List x:TypeArguments="umabh:HtmlValueMappingBase" Capacity="4">
+                  <umabh:HtmlTextValueMapping Name="teamName" Value="[&quot;Elera&quot;]" />
+                </scg:List>
+              </umabh:HtmlContentArgument.ValueMappings>
+            </umabh:HtmlContentArgument>
+          </umab:CreateHtmlContent.HtmlContentArg>
+        </umab:CreateHtmlContent>
+      </If.Else>
+    </If>
+    <TryCatch DisplayName="Try Catch -SendMail" sap:VirtualizedContainerService.HintSize="975,411" sap2010:WorkflowViewState.IdRef="TryCatch_3">
       <TryCatch.Try>
-        <Assign DisplayName="Assign - Get Application Exception Items" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_5">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:String">[applicationItems]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Negócio")) Is Nothing, "0",queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Negócio")).
-CopyToDataTable.RowCount.ToString)]</InArgument>
-          </Assign.Value>
-        </Assign>
-      </TryCatch.Try>
-      <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="440,151" sap2010:WorkflowViewState.IdRef="Catch`1_5">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ActivityAction x:TypeArguments="s:Exception">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-            </ActivityAction.Argument>
-            <Assign DisplayName="Assign - Set 0 Application Exception Items" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_8">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[applicationItems]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">0</InArgument>
-              </Assign.Value>
-            </Assign>
-          </ActivityAction>
-        </Catch>
-      </TryCatch.Catches>
-    </TryCatch>
-    <TryCatch DisplayName="Try Catch - Get BusinessException Items" sap:VirtualizedContainerService.HintSize="535,311" sap2010:WorkflowViewState.IdRef="TryCatch_8">
-      <TryCatch.Try>
-        <Assign DisplayName="Assign - Get Buisiness Exception Items" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_6">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:String">[businessItems]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Aplicação")).
-CopyToDataTable.RowCount &lt; 1, "0",queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Negócio")).
-CopyToDataTable.RowCount.ToString)]</InArgument>
-          </Assign.Value>
-        </Assign>
-      </TryCatch.Try>
-      <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="438,21" sap2010:WorkflowViewState.IdRef="Catch`1_6">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ActivityAction x:TypeArguments="s:Exception">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-            </ActivityAction.Argument>
-            <Assign DisplayName="Assign - Set 0 Business Exception Items" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_9">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[businessItems]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">0</InArgument>
-              </Assign.Value>
-            </Assign>
-          </ActivityAction>
-        </Catch>
-      </TryCatch.Catches>
-    </TryCatch>
-    <umab:CreateHtmlContent DisplayName="Create HTML Content" sap:VirtualizedContainerService.HintSize="535,153" HtmlContent="[bodyHtml]" sap2010:WorkflowViewState.IdRef="CreateHtmlContent_4">
-      <umab:CreateHtmlContent.HtmlContentArg>
-        <umabh:HtmlContentArgument FilePath=".data/HtmlContent.html">
-          <umabh:HtmlContentArgument.RuntimeImages>
-            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-          </umabh:HtmlContentArgument.RuntimeImages>
-          <umabh:HtmlContentArgument.ValueMappings>
-            <scg:List x:TypeArguments="umabh:HtmlValueMappingBase" Capacity="4">
-              <umabh:HtmlTextValueMapping Name="sucess" Value="[successItems]" />
-              <umabh:HtmlTextValueMapping Name="application" Value="[applicationItems]" />
-              <umabh:HtmlTextValueMapping Name="business" Value="[businessItems]" />
-            </scg:List>
-          </umabh:HtmlContentArgument.ValueMappings>
-        </umabh:HtmlContentArgument>
-      </umab:CreateHtmlContent.HtmlContentArg>
-    </umab:CreateHtmlContent>
-    <TryCatch DisplayName="Try Catch -SendMail" sap:VirtualizedContainerService.HintSize="535,610" sap2010:WorkflowViewState.IdRef="TryCatch_3">
-      <TryCatch.Try>
-        <Switch x:TypeArguments="x:String" DisplayName="Switch - Send Mail Framework" Expression="[in_sendMailFramework]" sap:VirtualizedContainerService.HintSize="497,382" sap2010:WorkflowViewState.IdRef="Switch`1_1">
-          <ui:CommentOut x:Key="Office365" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+        <Switch x:TypeArguments="x:String" DisplayName="Switch - Send Mail Framework" Expression="[in_sendMailFramework]" sap:VirtualizedContainerService.HintSize="497,183" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+          <ui:CommentOut x:Key="Office365" sap:VirtualizedContainerService.HintSize="628,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
             <ui:CommentOut.Body>
-              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,163" sap2010:WorkflowViewState.IdRef="Sequence_15">
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="418,163" sap2010:WorkflowViewState.IdRef="Sequence_15">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <uma:Office365ApplicationScope ApplicationSecret="{x:Null}" CertificateAsBase64="{x:Null}" CertificatePassword="{x:Null}" ContinueOnError="{x:Null}" Password="{x:Null}" SecurePassword="{x:Null}" Timeout="{x:Null}" Username="{x:Null}" ApplicationId="[in_applicationId]" AuthenticationType="ApplicationIdAndSecret" DisplayName="Microsoft Office 365 Scope report for business area" Environment="Global" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="Office365ApplicationScope_1" OAuthApplication="UiPath" SecureApplicationSecret="[in_clientSecretOffice365App]" Services="Mail" Tenant="[in_tenantId]">
+                <uma:Office365ApplicationScope ApplicationSecret="{x:Null}" CertificateAsBase64="{x:Null}" CertificatePassword="{x:Null}" ContinueOnError="{x:Null}" Password="{x:Null}" SecurePassword="{x:Null}" Timeout="{x:Null}" Username="{x:Null}" ApplicationId="[in_applicationId]" AuthenticationType="ApplicationIdAndSecret" DisplayName="Microsoft Office 365 Scope report for business area" Environment="Global" sap:VirtualizedContainerService.HintSize="356,52" sap2010:WorkflowViewState.IdRef="Office365ApplicationScope_1" OAuthApplication="UiPath" SecureApplicationSecret="[in_clientSecretOffice365App]" Services="Mail" Tenant="[in_tenantId]">
                   <uma:Office365ApplicationScope.Body>
                     <ActivityAction x:TypeArguments="mg:GraphServiceClient">
                       <ActivityAction.Argument>
@@ -362,7 +434,7 @@ CopyToDataTable.RowCount.ToString)]</InArgument>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:CommentOut>
-          <ui:SendMail Bcc="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" x:Key="SMTP" Body="[bodyHtml]" Cc="[in_mailReceiverCc]" DisplayName="SendMail - SMTP" EnableSSL="True" From="[in_mailSender]" sap:VirtualizedContainerService.HintSize="334,152" sap2010:WorkflowViewState.IdRef="SendMail_4" IsBodyHtml="True" Port="[Cint(in_smtpMailPort)]" SecureConnection="Auto" Server="[in_smtpMailServer]" Subject="[in_mailSubject]" To="[in_mailReceiver]">
+          <ui:SendMail Bcc="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" x:Key="SMTP" Body="[bodyHtml]" Cc="[in_mailReceiverCc]" DisplayName="SendMail - SMTP" EnableSSL="True" From="[in_mailSender]" sap:VirtualizedContainerService.HintSize="334,149" sap2010:WorkflowViewState.IdRef="SendMail_4" IsBodyHtml="True" Port="[Cint(in_smtpMailPort)]" SecureConnection="Auto" Server="[in_smtpMailServer]" Subject="[in_mailSubject]" To="[in_mailReceiver]">
             <ui:SendMail.Files>
               <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
             </ui:SendMail.Files>
@@ -388,8 +460,8 @@ CopyToDataTable.RowCount.ToString)]</InArgument>
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:DeleteFileX DisplayName="Delete file exception" sap:VirtualizedContainerService.HintSize="388,80" sap2010:WorkflowViewState.IdRef="DeleteFileX_3" Path="[in_pathFileAttach]" />
-              <Rethrow sap:VirtualizedContainerService.HintSize="388,25" sap2010:WorkflowViewState.IdRef="Rethrow_2" />
+              <ui:DeleteFileX DisplayName="Delete file exception" sap:VirtualizedContainerService.HintSize="384,80" sap2010:WorkflowViewState.IdRef="DeleteFileX_3" Path="[in_pathFileAttach]" />
+              <Rethrow sap:VirtualizedContainerService.HintSize="384,25" sap2010:WorkflowViewState.IdRef="Rethrow_2" />
             </Sequence>
           </ActivityAction>
         </Catch>

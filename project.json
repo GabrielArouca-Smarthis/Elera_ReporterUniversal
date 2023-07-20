@@ -1,6 +1,5 @@
 {
-  "name": "Elera_ReporterUniversal",
-  "projectId": "e76bf4c7-1965-4151-a616-28f18a6cd43a",
+  "name": "Smarthis_ReporterUniversalCNDs",
   "description": "Processo responsável por fazer o reporter dos itens de fila dos demais processos executados.",
   "main": "Main.xaml",
   "dependencies": {
@@ -16,7 +15,7 @@
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "19.10.2.0",
-  "projectVersion": "1.0.5",
+  "projectVersion": "1.0.6-alpha.1",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
@@ -24,7 +23,6 @@
     "isAttended": false,
     "requiresUserInteraction": true,
     "supportsPersistence": false,
-    "workflowSerialization": "DataContract",
     "excludedLoggedData": [
       "Private:*",
       "*password*"

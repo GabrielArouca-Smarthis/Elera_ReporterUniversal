@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head data-id="__react-email-head">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body data-id="__react-email-body" style="background-color:#f3f3f5;font-family:HelveticaNeue,Helvetica,Arial,sans-serif">
+  <table align="center" width="100%" data-id="__react-email-container" role="presentation" cellspacing="0" cellpadding="0" border="0" style="max-width:680px;width:100%;margin:0 auto;background-color:#ffffff">
+    <tbody>
+      <tr style="width:100%">
+        <td>
+          <table align="center" width="100%" data-id="react-email-section" style="display:flex;background:#f3f3f5;padding:20px 30px" border="0" cellpadding="0" cellspacing="0" role="presentation">
+            <tbody>
+              <tr>
+                <td>
+                  <img data-id="react-email-img" alt="logo {{ team_name }}" src="{{ img_team_logo }}" width="146" style="display:block;outline:none;border:none;text-decoration:none"/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table align="center" width="100%" data-id="react-email-row" style="border-radius:5px 5px 0 0;margin:auto" role="presentation" cellspacing="0" cellpadding="0" border="0">
+            <tbody style="width:100%">
+              <tr style="width:100%">
+                <td data-id="__react-email-column" style="padding:30px 10px;display:flex;justify-content:center;align-items:center">
+                  <img data-id="react-email-img" src="{{ img_team_banner }}" width="650" style="display:block;outline:none;border:none;text-decoration:none;margin:auto"/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table align="center" width="100%" data-id="react-email-section" style="padding:30px 30px 40px 30px" border="0" cellpadding="0" cellspacing="0" role="presentation">
+            <tbody>
+              <tr>
+                <td>
+                  <h2 data-id="react-email-heading" style="margin:0 0 15px;font-weight:bold;font-size:21px;line-height:21px;color:#0c0d0e">Olá, Time {{ team_name }}!</h2>
+                  <p data-id="react-email-text" style="font-size:15px;line-height:18px;margin:16px 0;color:#3c3f44">Segue o Relatório dos itens que foram processados nos últimos 30 dias.</p>
+                  <hr data-id="react-email-hr" style="width:100%;border:none;border-top:1px solid #eaeaea;margin:30px 0"/>
+                  <h2 data-id="react-email-heading" style="margin:0 0 15px;font-weight:bold;font-size:21px;line-height:21px;color:#0c0d0e">Todas as informações do seu processo em um só lugar.</h2>
+                  <p data-id="react-email-text" style="font-size:15px;line-height:18px;margin:16px 0;color:#3c3f44">A seguir, alguns pontos de destaque sobre o seu processo:</p>
+                  <ul>
+                    <li>
+                      <p data-id="react-email-text" style="font-size:15px;line-height:18px;margin:16px 0;color:#3c3f44">Foram processados um total de <b style="color:green">{{ success_items }}</b> itens com sucesso.</p>
+                    </li>
+                    <li>
+                      <p data-id="react-email-text" style="font-size:15px;line-height:18px;margin:16px 0;color:#3c3f44">A taxa de sucesso dos itens na média histórica está em <b>{{ historic_percentage }}</b> e em <b>{{ last_day_percentage }}</b> no último dia de execução.</p>
+                    </li>
+                    <li>
+                      <p data-id="react-email-text" style="font-size:15px;line-height:18px;margin:16px 0;color:#3c3f44">Foram detectados <b style="color:red">{{ application_exception_items }}</b> exceções de aplicação e <b style="color:orange">{{ business_exception_items }}</b> exceções de regra de negócio.</p>
+                    </li>
+                  </ul>
+                  <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:40px 0 10px 0;color:#3c3f44">Para mais informações, encontra-se abaixo a tabela com o histórico de processamento.</p>
+                  <img data-id="react-email-img" src="{{ img_table_processes }}" style="display:block;outline:none;border:none;text-decoration:none"/>
+                  <p data-id="react-email-text" style="font-size:14px;line-height:24px;margin:40px 0 10px 0;color:#3c3f44">Detalhamento do último dia de execução <b>{{ last_day_execution_date }}</b>:</p>
+                  <img data-id="react-email-img" src="{{ img_table_error }}" style="display:block;outline:none;border:none;text-decoration:none;width:100%"/>
+                  <hr data-id="react-email-hr" style="width:100%;border:none;border-top:1px solid #eaeaea;margin:30px 0"/>
+                  <h2 data-id="react-email-heading" style="margin:0 0 15px;font-weight:bold;font-size:21px;line-height:21px;color:#0c0d0e">Abra um chamado ao identificar uma exceção que exija atuação do Time {{ team_alternative_name }}.</h2>
+                  <table align="center" width="100%" data-id="react-email-section" style="margin-top:24px;display:block" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <a href="http://servicos.br.com.br/" data-id="react-email-link" target="_blank" style="color:#000000;text-decoration:none;background-color:#01FFA9;border:1px solid #01FFA9;font-size:17px;line-height:42px;padding:16px 32px;border-radius:32px;max-width:120px">Abrir incidente</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table align="center" width="100%" data-id="react-email-section" style="width:680px;margin:32px auto 0 auto;padding:0 30px" border="0" cellpadding="0" cellspacing="0" role="presentation">
+    <tbody>
+      <tr>
+        <td>
+          <hr data-id="react-email-hr" style="width:100%;border:none;border-top:1px solid #eaeaea;margin:30px 0;border-color:#d6d8db"/>
+          <div style="display:flex">
+            <img data-id="react-email-img" alt="logo {{ team_name }}" src="{{ img_team_logo }}" width="111" style="display:block;outline:none;border:none;text-decoration:none;margin-right:auto"/>
+            <img data-id="react-email-img" alt="logo Smarthis" src="https://s3-image-next.s3.amazonaws.com/images/smarthis-logo.png" width="111" height="29" style="display:block;outline:none;border:none;text-decoration:none;margin:auto 0"/>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

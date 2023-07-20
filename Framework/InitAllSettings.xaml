@@ -3,12 +3,11 @@
     <x:Property sap2010:Annotation.AnnotationText="Path to the configuration file that defines settings, constants and assets." Name="in_ConfigFile" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Names of the sheets corresponding to settings and constants in the configuration file." Name="in_ConfigSheets" Type="InArgument(s:String[])" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="out_Config" Type="OutArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="in_credentialBraxMail" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>717.6,3062.4</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1229,3064</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetAllSettings_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="29">
@@ -74,17 +73,16 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Initialize, populate and output a configuration Dictionary to be used throughout the project. &#xA;Settings and constants are read from the local configuration file, and assets are fetched from Orchestrator. &#xA;Asset values overwrite settings and constant values if they are defined with the same name." DisplayName="Initialize All Settings" sap:VirtualizedContainerService.HintSize="728,2997.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence sap2010:Annotation.AnnotationText="Initialize, populate and output a configuration Dictionary to be used throughout the project. &#xA;Settings and constants are read from the local configuration file, and assets are fetched from Orchestrator. &#xA;Asset values overwrite settings and constant values if they are defined with the same name." DisplayName="Initialize All Settings" sap:VirtualizedContainerService.HintSize="728,2919" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Assing out_Config (initialization)" sap:VirtualizedContainerService.HintSize="665.6,80.8" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="Assing out_Config (initialization)" sap:VirtualizedContainerService.HintSize="666,61" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[out_Config]</OutArgument>
       </Assign.To>
@@ -92,13 +90,13 @@
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[New Dictionary(of String, Object)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For each configuration sheet" sap:VirtualizedContainerService.HintSize="665.6,817.6" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[in_ConfigSheets]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For each configuration sheet" sap:VirtualizedContainerService.HintSize="666,796" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[in_ConfigSheets]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:String" Name="Sheet" />
           </ActivityAction.Argument>
-          <Sequence sap2010:Annotation.AnnotationText="Read settings and constants from the configuration file and add them to the Config dictionary." DisplayName="Get local settings and constants" sap:VirtualizedContainerService.HintSize="579.2,692.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <Sequence sap2010:Annotation.AnnotationText="Read settings and constants from the configuration file and add them to the Config dictionary." DisplayName="Get local settings and constants" sap:VirtualizedContainerService.HintSize="580,671" sap2010:WorkflowViewState.IdRef="Sequence_5">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable" Name="SettingsAndConstants" />
             </Sequence.Variables>
@@ -109,14 +107,14 @@
                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[SettingsAndConstants]" DisplayName="Read range (Settings and Constants sheets)" sap:VirtualizedContainerService.HintSize="516.8,88" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="[Sheet]" WorkbookPath="[in_ConfigFile]" />
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[SettingsAndConstants]" DisplayName="For each configuration row" sap:VirtualizedContainerService.HintSize="516.8,421.6" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[SettingsAndConstants]" DisplayName="Read range (Settings and Constants sheets)" sap:VirtualizedContainerService.HintSize="518,88" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="[Sheet]" WorkbookPath="[in_ConfigFile]" />
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[SettingsAndConstants]" DisplayName="For each configuration row" sap:VirtualizedContainerService.HintSize="518,401" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="Row" />
                   </ActivityAction.Argument>
-                  <If sap2010:Annotation.AnnotationText="Read non-empty rows in the sheet." Condition="[Not String.IsNullOrWhiteSpace(row(&quot;Name&quot;).ToString.Trim)]" DisplayName="If configuration row is not empty" sap:VirtualizedContainerService.HintSize="483.2,300.8" sap2010:WorkflowViewState.IdRef="If_1">
+                  <If sap2010:Annotation.AnnotationText="Read non-empty rows in the sheet." Condition="[Not String.IsNullOrWhiteSpace(row(&quot;Name&quot;).ToString.Trim)]" DisplayName="If configuration row is not empty" sap:VirtualizedContainerService.HintSize="484,280" sap2010:WorkflowViewState.IdRef="If_1">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -125,7 +123,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <Assign DisplayName="Add Config key/value pair" sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="Assign_15">
+                      <Assign DisplayName="Add Config key/value pair" sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="Assign_15">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:Object">[out_Config(Row("Name").ToString.Trim)]</OutArgument>
                         </Assign.To>
@@ -148,7 +146,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <TryCatch DisplayName="Try initializing assets" sap:VirtualizedContainerService.HintSize="665.6,1226.4" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+    <TryCatch DisplayName="Try initializing assets" sap:VirtualizedContainerService.HintSize="666,1197" sap2010:WorkflowViewState.IdRef="TryCatch_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -156,7 +154,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence sap2010:Annotation.AnnotationText="Get from Orchestrator the values of assets listed in the Assets sheet." DisplayName="Get Orchestrator assets" sap:VirtualizedContainerService.HintSize="628.8,995.2" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence sap2010:Annotation.AnnotationText="Get from Orchestrator the values of assets listed in the Assets sheet." DisplayName="Get Orchestrator assets" sap:VirtualizedContainerService.HintSize="534,969" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <Sequence.Variables>
             <Variable x:TypeArguments="sd:DataTable" Name="Assets" />
           </Sequence.Variables>
@@ -167,14 +165,14 @@
               <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[Assets]" DisplayName="Read range (Assets sheet)" sap:VirtualizedContainerService.HintSize="566.4,88" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="Assets" WorkbookPath="[in_ConfigFile]" />
-          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[Assets]" DisplayName="For each asset row" sap:VirtualizedContainerService.HintSize="566.4,724" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+          <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[Assets]" DisplayName="Read range (Assets sheet)" sap:VirtualizedContainerService.HintSize="472,88" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="Assets" WorkbookPath="[in_ConfigFile]" />
+          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[Assets]" DisplayName="For each asset row" sap:VirtualizedContainerService.HintSize="472,699" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
             <ui:ForEachRow.Body>
               <ActivityAction x:TypeArguments="sd:DataRow">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="sd:DataRow" Name="Row" />
                 </ActivityAction.Argument>
-                <TryCatch DisplayName="Try retrieving asset from Orchestrator" sap:VirtualizedContainerService.HintSize="532.8,603.2" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                <TryCatch DisplayName="Try retrieving asset from Orchestrator" sap:VirtualizedContainerService.HintSize="438,578" sap2010:WorkflowViewState.IdRef="TryCatch_3">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -182,7 +180,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <TryCatch.Try>
-                    <Sequence DisplayName="Get asset from Orchestrator" sap:VirtualizedContainerService.HintSize="496,372" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <Sequence DisplayName="Get asset from Orchestrator" sap:VirtualizedContainerService.HintSize="400,350" sap2010:WorkflowViewState.IdRef="Sequence_11">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:String" Name="AssetValue" />
                       </Sequence.Variables>
@@ -191,12 +189,12 @@
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="[row(&quot;Asset&quot;).ToString]" DisplayName="Get Orchestrator asset" FolderPath="[row(&quot;OrchestratorAssetFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="433.6,139.2" sap2010:WorkflowViewState.IdRef="GetRobotAsset_5">
+                      <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="[row(&quot;Asset&quot;).ToString]" DisplayName="Get Orchestrator asset" FolderPath="[row(&quot;OrchestratorAssetFolder&quot;).ToString]" sap:VirtualizedContainerService.HintSize="338,138" sap2010:WorkflowViewState.IdRef="GetRobotAsset_5">
                         <ui:GetRobotAsset.Value>
                           <OutArgument x:TypeArguments="x:String">[AssetValue]</OutArgument>
                         </ui:GetRobotAsset.Value>
                       </ui:GetRobotAsset>
-                      <Assign DisplayName="Assign asset value in Config" sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="Assign_23">
+                      <Assign DisplayName="Assign asset value in Config" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="Assign_23">
                         <Assign.To>
                           <OutArgument x:TypeArguments="x:Object">[out_Config(row("Name").ToString)]</OutArgument>
                         </Assign.To>
@@ -207,7 +205,7 @@
                     </Sequence>
                   </TryCatch.Try>
                   <TryCatch.Catches>
-                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="499.2,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -218,7 +216,7 @@
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="s:Exception" Name="Exception" />
                         </ActivityAction.Argument>
-                        <If sap2010:Annotation.AnnotationText="Logs a warn message in case the asset is specified in the Config file, but it could not be loaded from Orchestrator." Condition="[Not String.IsNullOrWhiteSpace(Row(&quot;Name&quot;).ToString.Trim)]" DisplayName="If asset name is specified, log warning" sap:VirtualizedContainerService.HintSize="483.2,311.2" sap2010:WorkflowViewState.IdRef="If_5">
+                        <If sap2010:Annotation.AnnotationText="Logs a warn message in case the asset is specified in the Config file, but it could not be loaded from Orchestrator." Condition="[Not String.IsNullOrWhiteSpace(Row(&quot;Name&quot;).ToString.Trim)]" DisplayName="If asset name is specified, log warning" sap:VirtualizedContainerService.HintSize="484,312" sap2010:WorkflowViewState.IdRef="If_5">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -227,7 +225,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <If.Then>
-                            <ui:LogMessage DisplayName="Log message (Failed to load asset)" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Warn" Message="[&quot;Loading asset &quot; + Row(&quot;Asset&quot;).ToString + &quot; failed: &quot; + Exception.Message]" />
+                            <ui:LogMessage DisplayName="Log message (Failed to load asset)" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Warn" Message="[&quot;Loading asset &quot; + Row(&quot;Asset&quot;).ToString + &quot; failed: &quot; + Exception.Message]" />
                           </If.Then>
                         </If>
                       </ActivityAction>
@@ -246,7 +244,7 @@
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="632,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="538,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -257,12 +255,12 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="Exception" />
             </ActivityAction.Argument>
-            <ui:LogMessage DisplayName="Log message (no assets)" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[&quot;No assets defined for the process.&quot;]" />
+            <ui:LogMessage DisplayName="Log message (no assets)" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[&quot;No assets defined for the process.&quot;]" />
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <Sequence DisplayName="Generate Token Orchestrator Api" sap:VirtualizedContainerService.HintSize="665.6,488" sap2010:WorkflowViewState.IdRef="Sequence_12">
+    <Sequence DisplayName="Generate Token Orchestrator Api" sap:VirtualizedContainerService.HintSize="666,485" sap2010:WorkflowViewState.IdRef="Sequence_12">
       <Sequence.Variables>
         <Variable x:TypeArguments="ss:SecureString" Name="password" />
         <Variable x:TypeArguments="ss:SecureString" Name="bearerToken" />
@@ -278,27 +276,17 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[DirectCast(out_Config(&quot;OrchestratorAppClientIdAndSecret&quot;),System.String)]" DisplayName="Get credential OrchestratorAppClientSecret" FolderPath="[DirectCast(out_Config(&quot;OrchestratorFolderPath&quot;),System.String)]" sap:VirtualizedContainerService.HintSize="430.4,80.8" sap2010:WorkflowViewState.IdRef="GetRobotCredential_3" Password="[OrchestratorAppClientSecret]" Username="[OrchestratorAppClientId]" />
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke CreateTokenOnPrem workflow" sap:VirtualizedContainerService.HintSize="430.4,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\OrchestratorApi\CreateTokenOnPrem.xaml">
+      <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[DirectCast(out_Config(&quot;OrchestratorAppClientIdAndSecret&quot;),System.String)]" DisplayName="Get credential OrchestratorAppClientSecret" FolderPath="[DirectCast(out_Config(&quot;OrchestratorFolderPath&quot;),System.String)]" sap:VirtualizedContainerService.HintSize="431,80" sap2010:WorkflowViewState.IdRef="GetRobotCredential_3" Password="[OrchestratorAppClientSecret]" Username="[OrchestratorAppClientId]" />
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke CreateTokenOnPrem workflow" sap:VirtualizedContainerService.HintSize="431,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\OrchestratorApi\CreateTokenOnPrem.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_bearerToken">
-            <mva:VisualBasicReference x:TypeArguments="ss:SecureString" ExpressionText="bearerToken" />
-          </OutArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="in_endPoint">
-            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="New Uri(New Uri(DirectCast(out_Config(&quot;uipathOrchestratorUrl&quot;),System.String)),DirectCast(out_Config(&quot;relPathCreateToken&quot;),System.String)).ToString" />
-          </InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="in_orchestratorAppClientId">
-            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="OrchestratorAppClientId" />
-          </InArgument>
-          <InArgument x:TypeArguments="ss:SecureString" x:Key="in_orchestratorAppClientSecret">
-            <mva:VisualBasicValue x:TypeArguments="ss:SecureString" ExpressionText="OrchestratorAppClientSecret" />
-          </InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="in_orchestratorAppScope">
-            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DirectCast(out_Config(&quot;OrchestratorAppScope&quot;), String)" />
-          </InArgument>
+          <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_bearerToken">[bearerToken]</OutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_endPoint">[New Uri(New Uri(DirectCast(out_Config("uipathOrchestratorUrl"),System.String)),DirectCast(out_Config("relPathCreateToken"),System.String)).ToString]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_orchestratorAppClientId">[OrchestratorAppClientId]</InArgument>
+          <InArgument x:TypeArguments="ss:SecureString" x:Key="in_orchestratorAppClientSecret">[OrchestratorAppClientSecret]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_orchestratorAppScope">[DirectCast(out_Config("OrchestratorAppScope"), String)]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:MultipleAssign DisplayName="Multiple assign brax mail credential and bearer token" sap:VirtualizedContainerService.HintSize="430.4,101.6" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign DisplayName="Multiple assign brax mail credential and bearer token" sap:VirtualizedContainerService.HintSize="431,101" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
         <ui:MultipleAssign.AssignOperations>
           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -313,15 +301,15 @@
         </ui:MultipleAssign.AssignOperations>
       </ui:MultipleAssign>
     </Sequence>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="665.6,52.8" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="666,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="555.2,597.6" sap2010:WorkflowViewState.IdRef="Sequence_14">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="554,595" sap2010:WorkflowViewState.IdRef="Sequence_14">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Read gif and logo Brax in base64" sap:VirtualizedContainerService.HintSize="492.8,485.6" sap2010:WorkflowViewState.IdRef="Sequence_13">
+          <Sequence DisplayName="Read gif and logo Brax in base64" sap:VirtualizedContainerService.HintSize="492,484" sap2010:WorkflowViewState.IdRef="Sequence_13">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="braxGifBase64" />
               <Variable x:TypeArguments="x:String" Name="braxLogoBase64" />
@@ -333,7 +321,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ReadTextFile Content="[braxGifBase64]" DisplayName="Read text brax gif in base64" FileName="[pathGifBraxBase64]" sap:VirtualizedContainerService.HintSize="430.4,80.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+            <ui:ReadTextFile Content="[braxGifBase64]" DisplayName="Read text brax gif in base64" FileName="[pathGifBraxBase64]" sap:VirtualizedContainerService.HintSize="430,80" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
             <ui:ReadTextFile Content="[braxLogoBase64]" DisplayName="Read text brax logo in base64" FileName="[pathLogoBraxBase64]" sap:VirtualizedContainerService.HintSize="430.4,80.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
             <ui:MultipleAssign DisplayName="Multiple assign brax in base64" sap:VirtualizedContainerService.HintSize="430.4,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
               <ui:MultipleAssign.AssignOperations>

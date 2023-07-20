@@ -1,0 +1,54 @@
+<HTML><HEAD>
+<STYLE type=text/css>
+        body {
+            font-family: Calibri;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .mapping {
+            background-color: #D3D4D7;
+            color: black;
+            padding: 1px;
+        }
+    </STYLE>
+<!-- Instruct the web browser control to use IE 6 to render the page. -->
+<META content=IE=6 http-equiv=X-UA-Compatible></HEAD>
+<BODY>
+<TABLE role=presentation style="FONT-SIZE: medium; MAX-WIDTH: 680px; FONT-FAMILY: HelveticaNeue, Helvetica, Arial, sans-serif; WIDTH: 680px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0px auto; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial" cellSpacing=0 cellPadding=0 width="100%" align=center border=0 data-id="__react-email-container">
+<TBODY>
+<TR style="WIDTH: 680px">
+<TD>
+<TABLE role=presentation style="BACKGROUND: rgb(243,243,245); PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 30px; DISPLAY: flex; PADDING-RIGHT: 30px" cellSpacing=0 cellPadding=0 width="100%" align=center border=0 data-id="react-email-section">
+<TBODY>
+<TR>
+<TD><IMG style="TEXT-DECORATION: none; BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; BORDER-LEFT: medium none; DISPLAY: block; OUTLINE-COLOR: invert" alt="logo {{ team_name }}" src="about:{{ img_team_logo }}" width=146 data-id="react-email-img"><SPAN id=alttext-container><SPAN id=alttext>logo {{ team_name }}</SPAN></SPAN></TD></TR></TBODY></TABLE>
+<TABLE role=presentation style="MARGIN: auto; border-radius: 5px 5px 0px 0px" cellSpacing=0 cellPadding=0 width="100%" align=center border=0 data-id="react-email-row">
+<TBODY style="WIDTH: 680px">
+<TR style="WIDTH: 680px">
+<TD style="PADDING-BOTTOM: 30px; PADDING-TOP: 30px; PADDING-LEFT: 10px; DISPLAY: flex; PADDING-RIGHT: 10px; justify-content: center; align-items: center" data-id="__react-email-column"><IMG style="TEXT-DECORATION: none; BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; BORDER-LEFT: medium none; MARGIN: auto; DISPLAY: block; OUTLINE-COLOR: invert" src="about:{{ img_team_banner }}" width=650 data-id="react-email-img"></TD></TR></TBODY></TABLE>
+<TABLE role=presentation style="PADDING-BOTTOM: 40px; PADDING-TOP: 30px; PADDING-LEFT: 30px; PADDING-RIGHT: 30px" cellSpacing=0 cellPadding=0 width="100%" align=center border=0 data-id="react-email-section">
+<TBODY>
+<TR>
+<TD>
+<H2 style="FONT-SIZE: 21px; FONT-WEIGHT: bold; COLOR: rgb(12,13,14); MARGIN: 0px 0px 15px; LINE-HEIGHT: 21px" data-id="react-email-heading">Olá, Time <SPAN class=mapping contentEditable=false>{{teamName}}</SPAN>!</H2>
+<P style="FONT-SIZE: 15px; COLOR: rgb(60,63,68); MARGIN: 16px 0px; LINE-HEIGHT: 18px" data-id="react-email-text">Segue o Relatório dos itens que foram processados nos último dia.</P>
+<HR style="BORDER-TOP: rgb(234,234,234) 1px solid; BORDER-RIGHT: medium none; WIDTH: 620px; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; MARGIN: 30px 0px; border-image: initial" data-id="react-email-hr">
+
+<H2 style="FONT-SIZE: 21px; FONT-WEIGHT: bold; COLOR: rgb(12,13,14); MARGIN: 0px 0px 15px; LINE-HEIGHT: 21px" data-id="react-email-heading">Todas as informações do seu processo em um só lugar.</H2>
+<P style="FONT-SIZE: 15px; COLOR: rgb(60,63,68); MARGIN: 16px 0px; LINE-HEIGHT: 18px" data-id="react-email-text">A seguir, alguns pontos de destaque sobre o seu processo:</P>
+<UL>
+<LI>
+<P style="FONT-SIZE: 15px; COLOR: rgb(60,63,68); MARGIN: 16px 0px; LINE-HEIGHT: 18px" data-id="react-email-text">Foram processados um total de<FONT color=#00ff00> </FONT><SPAN class=mapping contentEditable=false><FONT color=#339966>{{sucess}}</FONT></SPAN><SPAN>&nbsp;</SPAN>itens com sucesso.</P>
+<LI>
+<P style="FONT-SIZE: 15px; COLOR: rgb(60,63,68); MARGIN: 16px 0px; LINE-HEIGHT: 18px" data-id="react-email-text">Foram detectados<SPAN><FONT color=#ff0000>&nbsp;</FONT><SPAN class=mapping contentEditable=false><FONT color=#ff0000>{{application}}</FONT></SPAN></SPAN>exceções de aplicação e<SPAN>&nbsp;<SPAN class=mapping contentEditable=false><FONT color=#ffff99>{{business}}</FONT></SPAN></SPAN><SPAN><FONT color=#ffff99>&nbsp;</FONT></SPAN>exceções de regra de negócio.</P></LI></UL>
+<P style="FONT-SIZE: 14px; COLOR: rgb(60,63,68); MARGIN: 40px 0px 10px; LINE-HEIGHT: 24px" data-id="react-email-text">&nbsp;<SPAN class=mapping contentEditable=false>{{Table}}</SPAN></P></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TABLE role=presentation style="FONT-SIZE: medium; FONT-FAMILY: HelveticaNeue, Helvetica, Arial, sans-serif; WIDTH: 680px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; PADDING-TOP: 0px; PADDING-LEFT: 30px; ORPHANS: 2; WIDOWS: 2; MARGIN: 32px auto 0px; LETTER-SPACING: normal; PADDING-RIGHT: 30px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial" cellSpacing=0 cellPadding=0 width="100%" align=center border=0 data-id="react-email-section">
+<TBODY>
+<TR>
+<TD>
+<HR style="BORDER-TOP: rgb(214,216,219) 1px solid; BORDER-RIGHT: rgb(214,216,219); WIDTH: 620px; BORDER-BOTTOM: rgb(214,216,219); BORDER-LEFT: rgb(214,216,219); MARGIN: 30px 0px; border-image: initial" data-id="react-email-hr">
+
+<DIV style="DISPLAY: flex"><IMG style="TEXT-DECORATION: none; BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; BORDER-LEFT: medium none; DISPLAY: block; OUTLINE-COLOR: invert; MARGIN-RIGHT: auto" alt="logo {{ team_name }}" src="about:{{ img_team_logo }}" width=111 data-id="react-email-img"><IMG style="TEXT-DECORATION: none; BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-BOTTOM: medium none; OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; BORDER-LEFT: medium none; MARGIN: auto 0px; DISPLAY: block; OUTLINE-COLOR: invert" alt="logo Smarthis" src="https://s3-image-next.s3.amazonaws.com/images/smarthis-logo.png" width=111 height=29 data-id="react-email-img"></DIV></TD></TR></TBODY></TABLE></BODY></HTML>
