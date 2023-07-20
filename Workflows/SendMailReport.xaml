@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="SendMailReport" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mg="clr-namespace:Microsoft.Graph;assembly=Microsoft.Graph" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uma="clr-namespace:UiPath.MicrosoftOffice365.Activities;assembly=UiPath.MicrosoftOffice365.Activities" xmlns:umab="clr-namespace:UiPath.Mail.Activities.Business;assembly=UiPath.Mail.Activities" xmlns:umabh="clr-namespace:UiPath.Mail.Activities.Business.HtmlEditor;assembly=UiPath.Mail.Activities" xmlns:umam="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail;assembly=UiPath.MicrosoftOffice365.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SendMailReport" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mg="clr-namespace:Microsoft.Graph;assembly=Microsoft.Graph" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uma="clr-namespace:UiPath.MicrosoftOffice365.Activities;assembly=UiPath.MicrosoftOffice365.Activities" xmlns:umab="clr-namespace:UiPath.Mail.Activities.Business;assembly=UiPath.Mail.Activities" xmlns:umabh="clr-namespace:UiPath.Mail.Activities.Business.HtmlEditor;assembly=UiPath.Mail.Activities" xmlns:umam="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail;assembly=UiPath.MicrosoftOffice365.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_mailSender" Type="InArgument(x:String)">
       <x:Property.Attributes>
@@ -6,11 +6,6 @@
       </x:Property.Attributes>
     </x:Property>
     <x:Property Name="in_mailReceiver" Type="InArgument(x:String)">
-      <x:Property.Attributes>
-        <RequiredArgumentAttribute />
-      </x:Property.Attributes>
-    </x:Property>
-    <x:Property Name="in_subject" Type="InArgument(x:String)">
       <x:Property.Attributes>
         <RequiredArgumentAttribute />
       </x:Property.Attributes>
@@ -25,33 +20,27 @@
         <RequiredArgumentAttribute />
       </x:Property.Attributes>
     </x:Property>
-    <x:Property Name="in_emailReceiverCc" Type="InArgument(x:String)">
-      <x:Property.Attributes>
-        <RequiredArgumentAttribute />
-      </x:Property.Attributes>
-    </x:Property>
-    <x:Property Name="in_applicationId" Type="InArgument(x:String)">
-      <x:Property.Attributes>
-        <RequiredArgumentAttribute />
-      </x:Property.Attributes>
-    </x:Property>
-    <x:Property Name="in_tenantId" Type="InArgument(x:String)">
-      <x:Property.Attributes>
-        <RequiredArgumentAttribute />
-      </x:Property.Attributes>
-    </x:Property>
     <x:Property Name="in_sendMailToBusinessArea" Type="InArgument(x:Boolean)" />
-    <x:Property Name="in_clientSecretOffice365App" Type="InArgument(ss:SecureString)" />
     <x:Property Name="in_projectName" Type="InArgument(x:String)" />
     <x:Property Name="in_queueHistoric" Type="InArgument(sd:DataTable)" />
     <x:Property sap2010:Annotation.AnnotationText="String que irá definir se o envio de email utilizará a API do Office 365 (Office365), SMTP (SMTP), Outlook, " Name="in_sendMailFramework" Type="InArgument(x:String)" />
     <x:Property Name="in_smtpMailPort" Type="InArgument(x:String)" />
     <x:Property Name="in_smtpMailServer" Type="InArgument(x:String)" />
+    <x:Property Name="in_mailSubject" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property Name="in_mailReceiverCc" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1229,1211</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>899,2683</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SendMailReport_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="64">
@@ -145,7 +134,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SendMailReport" sap:VirtualizedContainerService.HintSize="597,1146" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SendMailReport" sap:VirtualizedContainerService.HintSize="597,2578" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="bodyHtml" />
       <Variable x:TypeArguments="x:String" Name="successItems" />
@@ -156,72 +145,224 @@
       <Variable x:TypeArguments="x:String" Name="in_lasDayPercentage" />
       <Variable x:TypeArguments="x:String" Name="in_lastDayExecutionDate" />
       <Variable x:TypeArguments="sd:DataTable" Name="queueFiltered" />
+      <Variable x:TypeArguments="x:String" Name="test" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="535,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[if(in_sendMailToBusinessArea AndAlso Not String.IsNullOrEmpty(in_mailReceiver),String.format(&quot;Enviando email de relatório da fila {0} para {1};{2}&quot;,in_queueName,in_mailReceiver,in_emailReceiverCc),String.format(&quot;Enviando email de relatório da fila {0} para {1}&quot;,in_queueName,in_emailReceiverCc))]" />
-    <Assign DisplayName="Assign - Filter date Renge Queue Historic" sap:VirtualizedContainerService.HintSize="535,65" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="535,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[if(in_sendMailToBusinessArea AndAlso Not String.IsNullOrEmpty(in_mailReceiver),String.format(&quot;Enviando email de relatório da fila {0} para {1};{2}&quot;,in_queueName,in_mailReceiver,in_mailReceiverCc),String.format(&quot;Enviando email de relatório da fila {0} para {1}&quot;,in_queueName,in_mailReceiverCc))]" />
+    <Assign DisplayName="Assign - Create queueFiltered DT" sap:VirtualizedContainerService.HintSize="535,82" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
-        <OutArgument x:TypeArguments="sd:DataTable">[in_queueHistoric]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable">[queueFiltered]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[in_queueHistoric.AsEnumerable.
-Where(Function(x) DateTime.ParseExact(x.Item("Início").ToString,"yyyy-MM-dd HH:mm:ss",System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR")) &gt; Now.AddDays(- 1)).CopyToDataTable]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable">[in_queueHistoric.Clone]</InArgument>
       </Assign.Value>
     </Assign>
-    <umab:CreateHtmlContent DisplayName="Create HTML Content - Body HTML" sap:VirtualizedContainerService.HintSize="535,152" HtmlContent="[bodyHtml]" sap2010:WorkflowViewState.IdRef="CreateHtmlContent_2">
+    <TryCatch DisplayName="Try Catch - Filter queueHistoric" sap:VirtualizedContainerService.HintSize="535,311" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+      <TryCatch.Try>
+        <Assign DisplayName="Assign - Filter queueHistoric" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataTable">[queueFiltered]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[in_queueHistoric.AsEnumerable.
+Where(Function(x) DateTime.ParseExact(x.Item("Início").ToString,"yyyy-MM-dd HH:mm:ss",System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR")) &gt; Now.AddDays(- 1)).CopyToDataTable]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="438,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Throw DisplayName="Throw - No Items" Exception="[new BusinessRuleException(&quot;Não existem itens processados nas últimas 24 horas&quot;)]" sap:VirtualizedContainerService.HintSize="200,25" sap2010:WorkflowViewState.IdRef="Throw_1" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <TryCatch DisplayName="Try Catch - Get Sucess Items" sap:VirtualizedContainerService.HintSize="535,314" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+      <TryCatch.Try>
+        <Assign DisplayName="Assign - Get Sucess Items" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_4">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[successItems]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String" xml:space="preserve">[queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Negócio")).
+CopyToDataTable.RowCount.ToString]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="440,151" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Assign DisplayName="Assign - Set 0 sucess Items" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[successItems]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">0</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <TryCatch DisplayName="Try Catch - Get Application Exception Items" sap:VirtualizedContainerService.HintSize="535,314" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+      <TryCatch.Try>
+        <Assign DisplayName="Assign - Get Application Exception Items" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_5">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[applicationItems]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Negócio")) Is Nothing, "0",queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Negócio")).
+CopyToDataTable.RowCount.ToString)]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="440,151" sap2010:WorkflowViewState.IdRef="Catch`1_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Assign DisplayName="Assign - Set 0 Application Exception Items" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[applicationItems]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">0</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <TryCatch DisplayName="Try Catch - Get BusinessException Items" sap:VirtualizedContainerService.HintSize="535,311" sap2010:WorkflowViewState.IdRef="TryCatch_8">
+      <TryCatch.Try>
+        <Assign DisplayName="Assign - Get Buisiness Exception Items" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_6">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[businessItems]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Aplicação")).
+CopyToDataTable.RowCount &lt; 1, "0",queueFiltered.AsEnumerable.Where(Function(x) x.Item("Status").ToString.Equals("Exceção de Negócio")).
+CopyToDataTable.RowCount.ToString)]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="438,21" sap2010:WorkflowViewState.IdRef="Catch`1_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Assign DisplayName="Assign - Set 0 Business Exception Items" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[businessItems]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">0</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <umab:CreateHtmlContent DisplayName="Create HTML Content" sap:VirtualizedContainerService.HintSize="535,153" HtmlContent="[bodyHtml]" sap2010:WorkflowViewState.IdRef="CreateHtmlContent_4">
       <umab:CreateHtmlContent.HtmlContentArg>
-        <umabh:HtmlContentArgument FilePath=".data/HtmlContent0.html">
+        <umabh:HtmlContentArgument FilePath=".data/HtmlContent.html">
           <umabh:HtmlContentArgument.RuntimeImages>
             <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
           </umabh:HtmlContentArgument.RuntimeImages>
           <umabh:HtmlContentArgument.ValueMappings>
-            <scg:List x:TypeArguments="umabh:HtmlValueMappingBase" Capacity="8">
-              <umabh:HtmlTextValueMapping Name="teamName" Value="[in_projectName]" />
-              <umabh:HtmlTextValueMapping Name="successItems" Value="[successItems]" />
-              <umabh:HtmlTextValueMapping Name="historicPercentage" Value="[in_historicPercentage]" />
-              <umabh:HtmlTextValueMapping Name="applicationExceptions" Value="[applicationItems]" />
-              <umabh:HtmlTextValueMapping Name="businessExceptions" Value="[businessItems]" />
-              <umabh:HtmlTableValueMapping Name="LastDayExecutions" Value="[in_queueHistoric]" />
+            <scg:List x:TypeArguments="umabh:HtmlValueMappingBase" Capacity="4">
+              <umabh:HtmlTextValueMapping Name="sucess" Value="[successItems]" />
+              <umabh:HtmlTextValueMapping Name="application" Value="[applicationItems]" />
+              <umabh:HtmlTextValueMapping Name="business" Value="[businessItems]" />
             </scg:List>
           </umabh:HtmlContentArgument.ValueMappings>
         </umabh:HtmlContentArgument>
       </umab:CreateHtmlContent.HtmlContentArg>
     </umab:CreateHtmlContent>
-    <TryCatch DisplayName="Try Catch -SendMail" sap:VirtualizedContainerService.HintSize="535,606" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+    <TryCatch DisplayName="Try Catch -SendMail" sap:VirtualizedContainerService.HintSize="535,610" sap2010:WorkflowViewState.IdRef="TryCatch_3">
       <TryCatch.Try>
-        <Switch x:TypeArguments="x:String" DisplayName="Switch - Send Mail Framework" Expression="[in_sendMailFramework]" sap:VirtualizedContainerService.HintSize="497,378" sap2010:WorkflowViewState.IdRef="Switch`1_1">
-          <uma:Office365ApplicationScope ApplicationSecret="{x:Null}" CertificateAsBase64="{x:Null}" CertificatePassword="{x:Null}" ContinueOnError="{x:Null}" Password="{x:Null}" SecurePassword="{x:Null}" Timeout="{x:Null}" Username="{x:Null}" x:Key="Office365" ApplicationId="[in_applicationId]" AuthenticationType="ApplicationIdAndSecret" DisplayName="Microsoft Office 365 Scope report for business area" Environment="Global" sap:VirtualizedContainerService.HintSize="530,52" sap2010:WorkflowViewState.IdRef="Office365ApplicationScope_1" OAuthApplication="UiPath" SecureApplicationSecret="[in_clientSecretOffice365App]" Services="Mail" Tenant="[in_tenantId]">
-            <uma:Office365ApplicationScope.Body>
-              <ActivityAction x:TypeArguments="mg:GraphServiceClient">
-                <ActivityAction.Argument>
-                  <DelegateInArgument x:TypeArguments="mg:GraphServiceClient" Name="ParentScope" />
-                </ActivityAction.Argument>
-                <Sequence DisplayName="Do send report" sap:VirtualizedContainerService.HintSize="496,598" sap2010:WorkflowViewState.IdRef="Sequence_10">
+        <Switch x:TypeArguments="x:String" DisplayName="Switch - Send Mail Framework" Expression="[in_sendMailFramework]" sap:VirtualizedContainerService.HintSize="497,382" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+          <ui:CommentOut x:Key="Office365" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,163" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <uma:Office365ApplicationScope ApplicationSecret="{x:Null}" CertificateAsBase64="{x:Null}" CertificatePassword="{x:Null}" ContinueOnError="{x:Null}" Password="{x:Null}" SecurePassword="{x:Null}" Timeout="{x:Null}" Username="{x:Null}" ApplicationId="[in_applicationId]" AuthenticationType="ApplicationIdAndSecret" DisplayName="Microsoft Office 365 Scope report for business area" Environment="Global" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="Office365ApplicationScope_1" OAuthApplication="UiPath" SecureApplicationSecret="[in_clientSecretOffice365App]" Services="Mail" Tenant="[in_tenantId]">
+                  <uma:Office365ApplicationScope.Body>
+                    <ActivityAction x:TypeArguments="mg:GraphServiceClient">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="mg:GraphServiceClient" Name="ParentScope" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="Do send report" sap:VirtualizedContainerService.HintSize="496,462" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <umam:SendMail Bcc="{x:Null}" ReplyTo="{x:Null}" Account="[in_mailSender]" AttachmentsCollection="[if(Not String.IsNullOrEmpty(in_pathFileAttach),{in_pathFileAttach},Nothing)]" Body="[bodyHtml]" Cc="[If(in_sendMailToBusinessArea,&#xA;&#x9;If(in_mailReceiverCc.Contains(&quot;;&quot;),&#xA;&#x9;&#x9;&#x9;in_mailReceiverCc.Split(&quot;;&quot;c),&#xA;&#x9;&#x9;&#x9;{in_mailReceiverCc}&#xA;&#x9;  ),&#xA;&#x9; Nothing&#xA;  )]" DisplayName="Send mail report" From="[in_mailSender]" sap:VirtualizedContainerService.HintSize="434,351" sap2010:WorkflowViewState.IdRef="SendMail_2" Importance="Normal" IsBodyHTML="True" IsDraft="False" Subject="[in_mailSubject]" To="[If(in_sendMailToBusinessArea,&#xA;&#x9;&#x9;If(Not String.IsNullOrEmpty(in_mailReceiver),&#xA;&#x9;&#x9;&#x9;&#x9;If(in_mailReceiver.Contains(&quot;;&quot;),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;in_mailReceiver.Split(&quot;;&quot;c),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{in_mailReceiver}&#xA;&#x9;&#x9;&#x9;&#x9;  ),&#xA;&#x9; &#x9;&#x9;&#x9; {in_mailReceiverCc}&#xA;&#x9;&#x9;   ),&#xA;   &#x9;     {in_mailReceiverCc}&#xA;  )]">
+                          <umam:SendMail.Attachments>
+                            <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                          </umam:SendMail.Attachments>
+                        </umam:SendMail>
+                      </Sequence>
+                    </ActivityAction>
+                  </uma:Office365ApplicationScope.Body>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <umam:SendMail Bcc="{x:Null}" ReplyTo="{x:Null}" Account="[in_mailSender]" AttachmentsCollection="[if(Not String.IsNullOrEmpty(in_pathFileAttach),{in_pathFileAttach},Nothing)]" Body="[bodyHtml]" Cc="[If(in_sendMailToBusinessArea,&#xA;&#x9;If(in_emailReceiverCc.Contains(&quot;;&quot;),&#xA;&#x9;&#x9;&#x9;in_emailReceiverCc.Split(&quot;;&quot;c),&#xA;&#x9;&#x9;&#x9;{in_emailReceiverCc}&#xA;&#x9;  ),&#xA;&#x9; Nothing&#xA;  )]" DisplayName="Send mail report" From="[in_mailSender]" sap:VirtualizedContainerService.HintSize="434,487" sap2010:WorkflowViewState.IdRef="SendMail_2" Importance="Normal" IsBodyHTML="True" IsDraft="False" Subject="[in_subject]" To="[If(in_sendMailToBusinessArea,&#xA;&#x9;&#x9;If(Not String.IsNullOrEmpty(in_mailReceiver),&#xA;&#x9;&#x9;&#x9;&#x9;If(in_mailReceiver.Contains(&quot;;&quot;),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;in_mailReceiver.Split(&quot;;&quot;c),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;{in_mailReceiver}&#xA;&#x9;&#x9;&#x9;&#x9;  ),&#xA;&#x9; &#x9;&#x9;&#x9; {in_emailReceiverCc}&#xA;&#x9;&#x9;   ),&#xA;   &#x9;     {in_emailReceiverCc}&#xA;  )]">
-                    <umam:SendMail.Attachments>
-                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
-                    </umam:SendMail.Attachments>
-                  </umam:SendMail>
-                </Sequence>
-              </ActivityAction>
-            </uma:Office365ApplicationScope.Body>
+                </uma:Office365ApplicationScope>
+              </Sequence>
+            </ui:CommentOut.Body>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-          </uma:Office365ApplicationScope>
-          <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" Email="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" x:Key="SMTP" Body="[bodyHtml]" DisplayName="SendMail - SMTP" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,149" sap2010:WorkflowViewState.IdRef="SendMail_4" IsBodyHtml="False" Port="[Cint(in_smtpMailPort)]" SecureConnection="Auto" Server="[in_smtpMailServer]" Subject="[in_mailSender]" To="[in_mailReceiver]">
+          </ui:CommentOut>
+          <ui:SendMail Bcc="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" x:Key="SMTP" Body="[bodyHtml]" Cc="[in_mailReceiverCc]" DisplayName="SendMail - SMTP" EnableSSL="True" From="[in_mailSender]" sap:VirtualizedContainerService.HintSize="334,152" sap2010:WorkflowViewState.IdRef="SendMail_4" IsBodyHtml="True" Port="[Cint(in_smtpMailPort)]" SecureConnection="Auto" Server="[in_smtpMailServer]" Subject="[in_mailSubject]" To="[in_mailReceiver]">
             <ui:SendMail.Files>
               <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
             </ui:SendMail.Files>
